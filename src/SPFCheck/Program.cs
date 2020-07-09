@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using DnsClient;
 using DnsClient.Protocol;
 using McMaster.Extensions.CommandLineUtils;
@@ -33,9 +35,16 @@ namespace SPFCheck
             var optionFileSource = app.Option("-f|--file <filepath>", "a file containing 1 domain per line to process", CommandOptionType.SingleOrNoValue);
             var optionDomain = app.Option("-d|--domain <domain>", "a domain to process", CommandOptionType.SingleOrNoValue);
             var optionSpf = app.Option("--spf <spfmatch>", "a domain of dns to match in the spf for the given domain(s)", CommandOptionType.MultipleValue);
-
+            var optionVersion = app.Option("--version", "display version number", CommandOptionType.NoValue);
             app.OnExecute(() => {
 
+                if(optionVersion.HasValue())
+                {
+                    var assembly = Assembly.GetExecutingAssembly();
+                    var version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+                    Console.WriteLine($"{version}");
+                    return;
+                }
                 if (optionFileSource.HasValue() && File.Exists(optionFileSource.Value()))
                 {
                     domainList.AddRange(File.ReadAllLines(optionFileSource.Value()));
