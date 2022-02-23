@@ -28,13 +28,13 @@ namespace SPFCheck
             }
 
             var app = new CommandLineApplication();
-            app.Name = "SPFCheck";
+            app.Name = nameof(SPFCheck);
             app.ResponseFileHandling = ResponseFileHandling.ParseArgsAsSpaceSeparated;
             app.HelpOption();
 
             var optionFileSource = app.Option("-f|--file <filepath>", "a file containing 1 domain per line to process", CommandOptionType.SingleOrNoValue);
             var optionDomain = app.Option("-d|--domain <domain>", "a domain to process", CommandOptionType.SingleOrNoValue);
-            var optionSpf = app.Option("--spf <spfmatch>", "a domain of dns to match in the spf for the given domain(s)", CommandOptionType.MultipleValue);
+            var optionSpf = app.Option("--spf <spfmatch>", "a domain or dns to match in the spf for the given domain(s)", CommandOptionType.MultipleValue);
             var optionVersion = app.Option("--version", "display version number", CommandOptionType.NoValue);
             app.OnExecute(() => {
 

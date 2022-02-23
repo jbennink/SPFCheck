@@ -1,28 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <PackageId>SPFCheck</PackageId>
-    <Authors>Johan Bennink</Authors>
-    <Company>Calway Nederland b.v.</Company>
-    <Product>SPFCheck</Product>
-    <Description>a simple commandline tool to check spf records for domain for the existence of a specific ip of host</Description>
-    <Copyright>Copyright 2020 Calway nederland b.v.</Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>0.0.0</Version>
-    <AssemblyVersion>0.0.0.0</AssemblyVersion>
-    <FileVersion>0.0.0.0</FileVersion>
-    <RepositoryUrl>https://https://github.com/jbennink/SPFCheck</RepositoryUrl>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<Product>SPFCheck</Product>
+		<Company>Calway Nederland b.v.</Company>
+		<Authors>Johan Bennink</Authors>
+		<Description>a simple commandline tool to check spf records for domain for the existence of a specific ip of host</Description>
+		<Copyright>Copyright 2020-2022 Calway nederland b.v.</Copyright>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<RepositoryUrl>https://https://github.com/jbennink/SPFCheck</RepositoryUrl>
+		<PackageId>SPFCheck</PackageId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DnsClient" Version="1.3.1" />
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.0.0" />
-    <PackageReference Include="MinVer" Version="2.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="DnsClient" Version="1.6.0" />
+		<PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.1" />
+		<PackageReference Include="MinVer" Version="2.5.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<Target Name="UpdateAssemblyVersion" AfterTargets="MinVer">
+		<PropertyGroup>
+			<AssemblyVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch).0</AssemblyVersion>
+		</PropertyGroup>
+	</Target>
 </Project>
